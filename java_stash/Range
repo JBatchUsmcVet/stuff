@@ -1,0 +1,108 @@
+
+
+public class Range
+{
+	
+	private double min;
+	private double max;
+	
+	public Range()
+	{
+	  	this.min=this.max=0.0;
+	}
+	
+	public Range(double min, double max)
+	{
+	 	
+	}
+	
+	public double getMin()
+	{
+		return this.min;
+	}
+	
+	public double getMax()
+	{
+		return this.max;
+	}
+	
+	public void setMin(double m)
+	{
+		if(m>this.max){
+		}
+		else
+			this.min=m;
+	}
+
+	public void setMax(double m)
+	{
+  	if(m<this.min){
+	  }
+		else
+			this.max=m;	
+	}
+	
+	public void setRange(double min, double max)
+	{
+			if(max<this.min || min>max)
+			{
+				
+			}
+			else
+			{
+					this.min=min;
+					this.max=max;
+			}
+	}
+			
+	public boolean overlaps(Range r2)
+	{
+		if(r2.max<this.max && r2.max>this.min)
+		return true;
+		else if (r2.min<this.max && r2.min>this.min)
+		return true;
+		else
+		return false;
+	}
+	
+	public boolean contains(double x)
+	{
+	  if(x>this.min&&x<this.max)
+	  return true;
+	  else
+	  return false;	
+	}
+	
+	public boolean contains(Range r2)
+	{
+		if(this.min<r2.min && this.max>r2.max)
+			return true;
+		else
+			return false;
+	}
+	
+	public Range combineWith(Range r2)
+	{
+	this.max=(Math.max(this.max,r2.max));
+	this.min=(Math.min(this.min,r2.min));
+	return this;	
+	}
+	
+	public boolean equals(Range x)
+	{
+		if(this.max == x.max && this.min ==x.min)
+		return true;
+		else
+		return false;
+	}
+	
+	public String toString()
+	{
+		String str;
+		str = ("("+this.min+","+this.max+")");
+		return str;
+	}
+	
+}
+
+
