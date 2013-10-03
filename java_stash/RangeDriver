@@ -1,0 +1,106 @@
+import java.util.Scanner;
+
+public class RangeDriver {
+	
+	public static void main (String args[]) {
+		
+	Range r1 = new Range();
+	Range r2 = new Range();
+	Range r3 = new Range();
+	Range r4 = new Range();
+	double x;
+	Scanner sc = new Scanner(System.in);
+		
+	System.out.println("Welcome to the Range testing program!\n");
+	System.out.println("Starting Range entry and resting of constructors\n");
+	System.out.print("Enter min and max values for Range 1: ");	
+	
+	r1.setRange(sc.nextDouble(),sc.nextDouble());
+	
+	System.out.println("Range 1 created as "+r1.toString());
+	System.out.println("Created Range 2 with default constructor: "+r2.toString());
+	System.out.println("Enter new max for Range 2: ");
+	
+	r2.setMax(sc.nextDouble());
+	
+	System.out.println("Range 2 changed by setMax():"+r2.toString());
+	System.out.println("Enter new min Range 2: ");
+	
+	r2.setMin(sc.nextDouble());
+	
+	System.out.println("Range 2 changed by setMin():"+r2.toString());
+	System.out.println("Enter new min and max for Range 2: ");
+
+	r2.setRange(sc.nextDouble(),sc.nextDouble());
+	System.out.println("Range 2 changed by setRange():"+r2.toString());
+	
+	
+	System.out.println("\nEnding Range entry and testing of constructors");
+	System.out.println("\nStarting overlap and containment testing");
+	System.out.println("\nEnter value of x for containment testing :");
+	
+	x=sc.nextDouble();
+	
+	if(!r1.contains(x))
+	System.out.println("Range 1 does not contain x");
+	else
+	System.out.println("Range 1 contains x");
+	
+	if(!r2.contains(x))
+	System.out.println("Range 2 does not contain x");
+	else
+	System.out.println("Range 2 contains x");
+	
+	if(r1.overlaps(r2))
+	System.out.println("Range 1 and Range 2 overlap");
+	else
+	System.out.println("Range 1 and Range 2 do not overlap");
+	
+	if(!r1.contains(r2))
+	System.out.println("Range 1 does not contain Range 2");
+	else
+	System.out.println("Range 1 contains Range 2");
+	
+	if(!r2.contains(r1))
+	System.out.println("Range 2 does not contain Range 1");
+	else
+	System.out.println("Range 2 contains Range 1/n");
+	
+	System.out.println("Ending overlap and containment testing\n");
+	System.out.println("starting combine and equality testing\n");
+	
+	if(!r1.overlaps(r2))
+	{
+	System.out.println("Range 3 = range 1 combined with Range 2: null");
+	System.out.println("Range 4 = range 2 combined with Range 1: null");
+	}
+	else
+	{
+	  r3 = r1.combineWith(r2);
+	  r4 = r2.combineWith(r1);
+	System.out.println("Range 3 = range 1 combined with Range 2: "+r3.toString());
+	System.out.println("Range 4 = range 2 combined with Range 1: "+r4.toString());
+	}
+	
+	
+	if(!r1.equals(r2)&&r1.contains(r2))
+	System.out.println("Range 1 and Range 2 are not equal");
+	  else if(!r1.contains(r2))
+  	System.out.println("Range 3 and Range 4 are null");
+	else
+	System.out.println("Range 1 and Range 2 are equal");	
+		
+	if(r3.equals(r4)&&r1.contains(r2))
+	System.out.println("Range 3 and Range 4 are equal");
+	  else if(!r1.contains(r2))
+	  System.out.println("Range 3 and Range 4 are null");
+	else
+	System.out.println("Range 3 and Range 4 are not equal");
+	
+	System.out.println("Ending combine and equality testing\n");
+	System.out.println("Goodbye");
+		
+		
+	}
+}
+
