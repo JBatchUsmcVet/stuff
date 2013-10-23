@@ -1,0 +1,110 @@
+
+class RouletteTest {
+  
+     private final int NUM_POCKETS=38;
+     private int[] pocketCounts= new int[NUM_POCKETS];
+     private int numSpins=1000;
+    
+    
+     public void rouletteTest(int numSpins)
+     {
+    	 for(int i=0;i<=numSpins;i++)
+      pocketCounts[(int)(Math.floor(Math.random()*38))]++;
+     }
+     
+     public void setNumSpins(int x)
+     {
+    	 this.numSpins=x;
+     }
+    
+    public int getHottest()
+      {
+        int hottest=0;
+        int hits=0;
+        
+        for(int i=0;i<pocketCounts.length;i++)
+        {
+        	if(hits<pocketCounts[i])
+        	{
+        		hottest=i; 
+        		hits=pocketCounts[i];
+        	}
+        	else
+        	{}
+        }
+        return hottest;
+      }
+    
+   public int getColdest()
+     {
+       int coldest=0;
+       int hits=pocketCounts[0];
+       
+       for(int i=0;i<pocketCounts.length;i++)
+       {
+       	if(hits<pocketCounts[i])
+       	{
+       		coldest=i; 
+       		hits=pocketCounts[i];
+       	}
+       	else
+       	{}
+       }
+       return coldest;
+     }
+    public int getPocketcount(int numPocket)
+      {
+        return pocketCounts[numPocket];
+      }
+    
+   
+    
+    public double getDev()
+      {
+        double dev;
+        int sum = 0;
+        int max = 0;
+        int min = pocketCounts[0];
+        double sd = 0;
+        for(int i=0; i<pocketCounts.length; i++)
+        {
+            sum = sum + pocketCounts[i];
+        }
+        
+        double average = sum / pocketCounts.length;
+        System.out.println("Average value is : " + average);
+        for(int i=0; i<pocketCounts.length; i++)
+        {
+            if(pocketCounts[i] > max)
+            {
+                max = pocketCounts[i];
+            }
+        }
+        System.out.println("Hottest number is : " + max);
+        for(int i=0; i<pocketCounts.length; i++)
+        {
+            if(pocketCounts[i] < min)
+            {
+                min = pocketCounts[i];
+            }
+        }
+        System.out.println("min number is : " + min);
+        for (int i=0; i<pocketCounts.length;i++)
+        {
+
+            sd += Math.sqrt(pocketCounts[i] - average) / pocketCounts.length;
+        }
+        double stDev = Math.sqrt(sd/(pocketCounts.length-1));
+        System.out.println("The standard deviation is : " + stDev);
+    
+      	dev=stDev;
+        return (double)dev;
+      }
+    public String toString()
+      {
+        String str="";
+        return str;
+        
+        
+      }
+}
