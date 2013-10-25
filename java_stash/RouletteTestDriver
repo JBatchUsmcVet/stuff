@@ -1,0 +1,80 @@
+import java.util.Scanner;
+public class RouletteTestDriver {
+        public static void main(String[] args)
+    {
+  
+    System.out.println("Welcome to the Roulette Simulator!\n");
+    System.out.println("Enter number of roulette tests to run:");
+      
+    Scanner stdIn = new Scanner(System.in);
+    int tests =stdIn.nextInt();
+      
+    System.out.println("Enter number of spins per test:\n");
+    int numSpins =stdIn.nextInt();
+    stdIn.close();  
+
+      
+    RouletteTest[] test = new RouletteTest[tests];
+        for(int i=0;i<test.length;i++)
+        {
+         test[i]= new RouletteTest(numSpins);
+        // System.out.println(test[i]);
+        }
+    sortRouletteTests(test);
+    printTestSummary(test);
+    }
+  
+        private static void sortRouletteTests(RouletteTest[] rTests)
+        {
+            for(int i = 0; i < rTests.length-1; i++)
+            {
+                for(int j = i+1; j < rTests.length; j++)
+                {
+                    if(rTests[i].getStdDev() > rTests[j].getStdDev())
+                    {
+                        RouletteTest temp = rTests[i];
+                        rTests[i] = rTests[j];
+                        rTests[j] = temp;
+                    }
+                }
+            }
+        }
+        private static void printTestSummary(RouletteTest[] rt)
+        {
+        	RouletteTest leastVar = rt[0];
+        	RouletteTest mostVar = rt[rt.length-1];
+        	System.out.print("Least Variable Test: ");
+            System.out.print(rt[0]);
+            
+            System.out.print("\n[  ");
+            for(int j=0;j<38;j++)
+            {
+            	if((j%6==0))
+            	System.out.print(""+leastVar.getPocketcount(j)+"  \n");
+            	else
+                System.out.print(""+leastVar.getPocketcount(j)+"  ");
+
+            }
+            System.out.print("]\n");
+
+        	System.out.print("Most Variable Test: ");
+            System.out.print(rt[rt.length-1]);
+
+            System.out.print("\n[  ");
+            for(int j=0;j<38;j++)
+            {
+            	if((j%6==0))
+            	System.out.print(""+mostVar.getPocketcount(j)+"  \n");
+            	else
+                System.out.print(""+mostVar.getPocketcount(j)+"  ");
+
+            }
+        	
+            System.out.print("]\n");
+            System.out.println("\nSorted Summary of all Tests: \n");
+            for(int i=0;i<rt.length;i++)
+                System.out.println(rt[i]);
+            
+        
+        }
+} 
